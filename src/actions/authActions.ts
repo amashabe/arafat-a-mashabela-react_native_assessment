@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { firebase } from '../utils/firebaseConfig';
 
-export const setUser = (user: firebase.User | null) => ({
+export const setUser = (user: any | null) => ({
   type: 'SET_USER',
   payload: user,
 });
@@ -26,11 +26,16 @@ export const signOut = () => async (dispatch: Dispatch) => {
 export const onAuthStateChanged = () => (dispatch: Dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log('user logged in!!!!!',)
-      dispatch(setUser(user?.multiFactor?.user))
+      firebase.firestore().collection("users").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().userId === user?.multiFactor?.user?.uid)
+            dispatch(setUser(doc.data()))
+          dispatch({ type: "SET_LOADING", payload: false })
+        })
+      })
     } else {
-      console.log('user not logged in!!!!!')
+      dispatch({ type: "SET_LOADING", payload: false })
     }
-    dispatch({ type: "SET_LOADING", payload: false })
+
   })
 }

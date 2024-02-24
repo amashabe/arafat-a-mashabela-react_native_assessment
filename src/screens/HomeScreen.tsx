@@ -1,21 +1,32 @@
-// HomeScreen.tsx
 import React from 'react';
-import { SafeAreaView, Text, Button } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { signOut } from '../actions/authActions';
+import { SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
 import { calculateSize } from '../utils/scale';
 import { StatusBarHeight } from '../utils/status-bar-height';
+import FullScreenCarousel from '../components/FullScreenCarousel';
+
+const carouselData = [
+  {
+    title: 'To do',
+    key: "todo"
+  },
+  {
+    title: 'In Progress',
+    key: "in-progress"
+  },
+  {
+    title: 'Done',
+    key: "done"
+  }
+];
+
 
 const HomeScreen: React.FC = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state: any) => state.auth.user);
-
-  const handleSignOut = () => {
-    dispatch(signOut());
-  };
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: calculateSize(StatusBarHeight) }}>
+      <FullScreenCarousel data={carouselData} />
     </SafeAreaView>
   );
 };
