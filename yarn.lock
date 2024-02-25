@@ -4061,9 +4061,9 @@ flow-enums-runtime@^0.0.6:
   integrity sha512-3PYnM29RFXwvAN6Pc/scUfkI7RwhQ/xqyLUyPNlXUp9S40zI8nup9tUSrTLSVnWGBN38FNiGWbwZOB6uR4OGdw==
 
 flow-parser@0.*:
-  version "0.229.0"
-  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.229.0.tgz#054b60d6f6a9fab76cd89dc6ca662fd32d910163"
-  integrity sha512-mOYmMuvJwAo/CvnMFEq4SHftq7E5188hYMTTxJyQOXk2nh+sgslRdYMw3wTthH+FMcFaZLtmBPuMu6IwztdoUQ==
+  version "0.229.2"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.229.2.tgz#b19ce67bfbfab8c91ee51dcddb9c3ab0f3bf2ab7"
+  integrity sha512-T72XV2Izvl7yV6dhHhLaJ630Y6vOZJl6dnOS6dN0bPW9ExuREu7xGAf3omtcxX76POTuux9TJPu9ZpS48a/rdw==
 
 flow-parser@^0.206.0:
   version "0.206.0"
@@ -7385,9 +7385,9 @@ yallist@^4.0.0:
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
 yaml@^2.2.1, yaml@^2.2.2:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.3.4.tgz#53fc1d514be80aabf386dc6001eb29bf3b7523b2"
-  integrity sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.0.tgz#2376db1083d157f4b3a452995803dbcf43b08140"
+  integrity sha512-j9iR8g+/t0lArF4V6NE/QCfT+CO7iLqrXAHZbJdo+LfjqP1vR8Fg5bSiaq6Q2lOD1AUEVrEVIgABvBFYojJVYQ==
 
 yargs-parser@^18.1.2:
   version "18.1.3"
