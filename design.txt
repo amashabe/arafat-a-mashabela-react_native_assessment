@@ -12,3 +12,13 @@ react-native-dotenv to musk the configuration just to add more security
 
 admin email: admin@kanban-ui.com / password: 123456
 user email: arafatsage@gmail.com / password: 123456
+
+create a .env file on a root project with this credentials 
+FIREBASE_API_KEY=AIzaSyC-pgfCm2md-Mq-aA2lbVMLJ6XbJ2Ni-fs
+FIREBASE_AUTH_DOMAIN=ats-online.firebaseapp.com
+FIREBASE_PROJECT_ID=ats-online
+STORAGE_BUCKET=ats-online.appspot.com,
+MESSAGING_SENDER_ID=547238263103,
+APP_ID=1:547238263103:web:7caa170d0013c6ca907b8a
+
+invited to firebase to view the tickets created 
