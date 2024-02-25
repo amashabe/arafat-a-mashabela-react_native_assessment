@@ -1,6 +1,6 @@
 // HomeScreen.tsx
 import React from 'react';
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../actions/authActions';
 import { calculateSize } from '../utils/scale';
@@ -14,12 +14,18 @@ const ProfileScreen: React.FC = () => {
         dispatch(signOut());
     };
 
+    console.log(user)
     return (
-        <SafeAreaView style={{ flex: 1, marginTop: calculateSize(StatusBarHeight) }}>
-            <Text>Welcome, {user?.email}</Text>
-            <TouchableOpacity onPress={handleSignOut}>
-                <Text>Sign Out</Text>
-            </TouchableOpacity>
+        <SafeAreaView style={{ flex: 1, marginTop: calculateSize(StatusBarHeight), marginStart: calculateSize(15), marginEnd: calculateSize(15), }}>
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}>
+                <TouchableOpacity onPress={handleSignOut}>
+                    <Text style={{ fontSize: calculateSize(15), color: "#2085ff", fontWeight: "bold" }}>Sign Out</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ flex: 11, justifyContent: "center", alignItems: "center" }}>
+                <Text style={{ fontSize: calculateSize(15), color: "#000", fontWeight: "bold" }}>Welcome</Text>
+                <Text>{`${user?.firstname} ${user?.lastname}`}</Text>
+            </View>
         </SafeAreaView>
     );
 };

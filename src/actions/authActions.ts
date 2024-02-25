@@ -6,14 +6,24 @@ export const setUser = (user: any | null) => ({
   payload: user,
 });
 
-export const signIn =
-  (email: string, password: string) => async (dispatch: Dispatch) => {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  };
+export const setError = (error: string | null) => ({
+  type: "SET_ERROR",
+  payload: error
+})
+
+export const setSpinner = (visible: boolean) => ({
+  type: "SET_SPINNER", payload: visible
+})
+
+export const signIn = (email: string, password: string) => async (dispatch: Dispatch) => {
+  dispatch(setError(null))
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
+  } catch (error: any) {
+    dispatch(setError("Incorrect email or password."))
+  }
+  dispatch(setSpinner(false))
+};
 
 export const signOut = () => async (dispatch: Dispatch) => {
   try {

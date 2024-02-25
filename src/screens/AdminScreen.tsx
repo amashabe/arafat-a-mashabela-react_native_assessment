@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   Button,
   FlatList,
@@ -13,7 +12,6 @@ import { StatusBarHeight } from "../utils/status-bar-height";
 import { setEditTicket, setModal, updateData } from "../actions/ticketActions";
 import AddTicket from "../components/AddTicket";
 import { firebase } from "../utils/firebaseConfig";
-import store from "../utils/store";
 
 interface Item {
   id: string;

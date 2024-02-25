@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TextInput, Text, Image, View, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { signIn } from '../actions/authActions';
+import { SafeAreaView, TextInput, Text, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSpinner, signIn } from '../actions/authActions';
 import { calculateSize } from '../utils/scale';
 import { StatusBarHeight } from '../utils/status-bar-height';
 
@@ -10,9 +10,15 @@ const SignInScreen: React.FC = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
+  const { spinner, error } = useSelector((state: any) => state.auth);
+
   const handleSignIn = () => {
+    dispatch(setSpinner(true))
     dispatch(signIn(email, password));
   };
+
+  console.log(spinner, 'spinner', error)
+  console.log(password, 'password')
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: calculateSize(StatusBarHeight) }}>
@@ -34,6 +40,7 @@ const SignInScreen: React.FC = () => {
             placeholder={"Email Address"}
             autoComplete='off'
             autoCorrect={false}
+            autoCapitalize={'none'}
             value={email}
             style={{
               borderColor: "#6D6D6D",
@@ -63,15 +70,15 @@ const SignInScreen: React.FC = () => {
               marginBottom: calculateSize(15)
             }}
           />
-
+          {error && <Text style={{ alignSelf: "center", marginBottom: calculateSize(10), fontSize: calculateSize(15), color: "#FF0000", fontWeight: "bold" }}>{error}</Text>}
           <TouchableOpacity
             onPress={handleSignIn}
-            // disabled={disable}
+            disabled={email === "" || password === "" ? true : false}
             style={{
               height: calculateSize(50),
               paddingTop: calculateSize(10),
               paddingBottom: calculateSize(10),
-              backgroundColor: '#2085ff',
+              backgroundColor: email === "" || password === "" ? '#D5D5D5' : '#2085ff',
               borderRadius: calculateSize(3),
               justifyContent: 'center',
               width: "100%",
@@ -81,7 +88,10 @@ const SignInScreen: React.FC = () => {
               shadowOpacity: 1,
               alignItems: 'center'
             }}>
-            <Text style={{ color: "white", fontSize: calculateSize(15), fontWeight: "bold", textAlign: 'center' }}>Sign In</Text>
+            {spinner ?
+              <ActivityIndicator size={calculateSize(15)} color={"#FFFFFF"} />
+              :
+              <Text style={{ color: "white", fontSize: calculateSize(15), fontWeight: "bold", textAlign: 'center' }}>Sign In</Text>}
           </TouchableOpacity>
         </View>
       </View>

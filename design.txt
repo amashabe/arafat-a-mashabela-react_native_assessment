@@ -1,0 +1,14 @@
+technology stack:
+    firebase (authentication and database)
+    expo v~50.0.7
+    react-native-extended-stylesheet
+    react-navigation
+    redux
+
+i chose firebase for auth and database, including redux for state management and react-navigation for navigation between the app(including auth logic).
+react-native-extended-stylesheet for scaling per screen 
+react-native-snap-carousel for different screen for todo, in progress and done
+react-native-dotenv to musk the configuration just to add more security
+
+admin email: admin@kanban-ui.com / password: 123456
+user email: arafatsage@gmail.com / password: 123456

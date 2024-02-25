@@ -33,61 +33,34 @@ interface ListItem {
   user: string | null;
 }
 
-const States = ["TODO", "IN-PROGRESS", "DONE"];
-
-const FullScreenCarousel: React.FC<FullScreenCarouselProps> = ({
-  data,
-  user,
-}) => {
+const FullScreenCarousel: React.FC<FullScreenCarouselProps> = ({ data, user }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const ticket = useSelector((state: any) => state.ticket);
-  console.log(user.userId);
+
+  
 
   const renderListItem = ({ item }: { item: ListItem }) => {
     return (
-      <View
-        style={{
-          flexDirection: "column",
-          alignItems: "flex-start",
-          padding: 10,
-          borderBottomWidth: 1,
-        }}
-      >
+      <View style={{ flexDirection: "column", alignItems: "flex-start", padding: calculateSize(10), borderBottomWidth: calculateSize(1), marginTop: calculateSize(10) }}>
         <View style={{ flex: 1 }}>
           <Text>{item.title}</Text>
           <Text>{item.description}</Text>
         </View>
         <View style={{ flexDirection: "row", gap: 2, alignItems: "center" }}>
           {item.user != user.userId && (
-            <Button
-              title="Assign to me"
-              onPress={() => handleAssigneToMe(item.id)}
-            />
+            <Button title={`Assign to ${user?.firstname} ${user?.lastname}`} onPress={() => handleAssigneToMe(item.id)} />
           )}
+
           {item.user == user.userId && (
             <Text style={{ fontWeight: "600" }}>Move Ticket:</Text>
           )}
+
           {item.state != "TODO" && item.user == user.userId && (
-            <Button
-              title="Previous"
-              onPress={() =>
-                handleChangeState(
-                  item,
-                  item.state == "DONE" ? "IN-PROGRESS" : "TODO"
-                )
-              }
-            />
+            <Button title="Previous" onPress={() => handleChangeState(item, item.state == "DONE" ? "IN-PROGRESS" : "TODO")} />
           )}
+
           {item.state != "DONE" && item.user == user.userId && (
-            <Button
-              title="Next"
-              onPress={() =>
-                handleChangeState(
-                  item,
-                  item.state == "TODO" ? "IN-PROGRESS" : "DONE"
-                )
-              }
-            />
+            <Button title="Next" onPress={() => handleChangeState(item, item.state == "TODO" ? "IN-PROGRESS" : "DONE")} />
           )}
         </View>
       </View>
@@ -96,12 +69,7 @@ const FullScreenCarousel: React.FC<FullScreenCarouselProps> = ({
 
   const handleAssigneToMe = async (id: string) => {
     try {
-      await firebase
-        .firestore()
-        .collection("tickets")
-        .doc(id)
-        .update({ user: user.userId });
-      console.log("Ticket assigned!");
+      await firebase.firestore().collection("tickets").doc(id).update({ user: user.userId });
     } catch (error) {
       console.error("Error assigning ticket: ", error);
     } finally {
@@ -111,12 +79,7 @@ const FullScreenCarousel: React.FC<FullScreenCarouselProps> = ({
 
   const handleChangeState = async (ticket: ListItem, nextState: string) => {
     try {
-      await firebase
-        .firestore()
-        .collection("tickets")
-        .doc(ticket.id)
-        .update({ state: nextState });
-      console.log("Ticket moved:", nextState);
+      await firebase.firestore().collection("tickets").doc(ticket.id).update({ state: nextState });
     } catch (error) {
       console.error("Error moving ticket: ", error);
     } finally {
@@ -125,19 +88,11 @@ const FullScreenCarousel: React.FC<FullScreenCarouselProps> = ({
   };
 
   const renderItem = ({ item }: { item: CarouselItem; index: number }) => {
-    const listOfTickets = ticket?.data?.filter(
-      (d: any) => d.state.toUpperCase() === item.key.toUpperCase()
-    );
-    console.log(item.key, listOfTickets);
+    const listOfTickets = ticket?.data?.filter((d: any) => d.state.toUpperCase() === item.key.toUpperCase());
     return (
       <View style={styles.slide}>
         <Text style={styles.title}>{item.title}</Text>
-        <FlatList
-          style={{ flex: 1 }}
-          data={listOfTickets}
-          renderItem={renderListItem}
-          keyExtractor={(i: any) => i.id}
-        />
+        <FlatList style={{ flex: 1 }} data={listOfTickets} renderItem={renderListItem} keyExtractor={(i: any) => i.id} />
       </View>
     );
   };

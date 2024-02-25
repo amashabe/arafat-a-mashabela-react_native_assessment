@@ -46,9 +46,7 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, marginTop: calculateSize(StatusBarHeight) }}
-    >
+    <SafeAreaView style={{ flex: 1, marginTop: calculateSize(StatusBarHeight) }}>
       <FullScreenCarousel data={carouselData} user={user} />
     </SafeAreaView>
   );

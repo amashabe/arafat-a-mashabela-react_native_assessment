@@ -84,7 +84,7 @@ const AddTicket: React.FC = (props) => {
         <Modal isVisible={isModalVisible}>
           <View
             style={{
-              backgroundColor: "white",
+              backgroundColor: "#FFF",
               padding: calculateSize(20),
               justifyContent: "center",
               alignItems: "center",
@@ -103,6 +103,7 @@ const AddTicket: React.FC = (props) => {
             <TextInput
               secureTextEntry={false}
               onChangeText={setTitle}
+              placeholderTextColor={"#000"}
               placeholder={"title"}
               autoComplete="off"
               autoCorrect={false}
@@ -126,6 +127,7 @@ const AddTicket: React.FC = (props) => {
               placeholder={"description"}
               autoComplete="off"
               autoCorrect={false}
+              placeholderTextColor={"#000"}
               value={description}
               multiline={true}
               style={{
